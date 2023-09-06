@@ -13,6 +13,11 @@ Rectangle
     color: "#465053"
     radius: 6
 
+    MouseArea {
+        id: bt
+
+    }
+
     TextInput {
         id: searchInput
         anchors {
@@ -26,18 +31,39 @@ Rectangle
         color: "#FFFFFF"
         maximumLength: parent.width
         focus: true
-//        onTextChanged: {
-//            originalModel.filter(searchInput.text);
-//        }
+
+        onTextChanged: {
+            originalModel.filter(searchInput.text)
+        }
+
+        Keys.onPressed: event => {
+                            if (event.key === Qt.Key_Up) {
+                                if (filteredModel.count == 0)
+                                return
+                                listView.currentIndex -= 1
+                                if (listView.currentIndex < 0)
+                                listView.currentIndex += filteredModel.count
+                                return;
+                            }
+                            if (event.key === Qt.Key_Down) {
+                                if (filteredModel.count == 0)
+                                return
+                                listView.currentIndex += 1
+                                if (listView.currentIndex >= filteredModel.count)
+                                listView.currentIndex -= filteredModel.count
+                                return
+                            }
+                            if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                                if (filteredModel.count != 0) {
+                                    var progam = filteredModel.get(listView.currentIndex).name
+                                    console.log(progam)
+                                }
+                                //backgroundPlate.visible = false
+                                return;
+                            }
+                        }
     }
 
-//    Rectangle {
-//        id: separator
-//        anchors.top: searchBar.bottom
-//        width: parent.width
-//        height: 1
-//        color: "blue"
-//    }
     ToolSeparator {
         id: separator
         orientation: Qt.Horizontal
@@ -45,7 +71,6 @@ Rectangle
         width: parent.width
     }
 
-    // right button #fc1944
     Rectangle {
         id: btn
         anchors {
@@ -93,10 +118,9 @@ Rectangle
             }
         }
 
-//        Component.onCompleted: {
-//            originalModel.filter("")
-//        }
-
+        Component.onCompleted: {
+            originalModel.filter("")
+        }
 
         ScrollView {
             id: scrollView
@@ -105,24 +129,28 @@ Rectangle
             clip: true
 
             ListView {
+                id: listView
                 anchors.fill: parent
 
-                model: originalModel
+                model: filteredModel
                 delegate: itemDelegate
                 // highlight: Rectangle { color: "#FFFFFF" }
                 highlightFollowsCurrentItem: true
-                highlightRangeMode: ListView.ApplyRange
-                //focus: true
             }
 
             Component {
                 id: itemDelegate
 
                 Rectangle {
+                    id: itemRect
+                    width: ListView.view.width
                     color: ListView.isCurrentItem?"#157efb":"#53d769" //"#3D424F"
                     height: 26
+                    //visible: searchInput.text ? name.match(`(${searchInput.text})`, "i") : true
+                    //height: visible ? 26 :0
 
                     Text {
+                        id: itemText
                         anchors.fill: parent
                         text: name
                         color: "#FFFFFF"
@@ -130,35 +158,24 @@ Rectangle
                         verticalAlignment: Text.AlignVCenter
                         leftPadding: 5
                     }
-                    visible: searchInput.text ? name.match(`(${searchInput.text})`, "i") : true
+
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        onEntered: {
+                            listView.currentIndex = index
+                            console.log("Mouse entered item:", itemRect.ListView.currentIndex, index)
+                        }
+                        onDoubleClicked: {
+                            var progam = name // filteredModel.get(listView.currentIndex).name
+                            console.log(progam)
+                            //backgroundPlate.visible = false
+                        }
+                    }
                 }
             }
         }
 
-        /*ListView {
-            anchors.fill: parent
-
-            model: originalModel
-            delegate: Rectangle {
-                color: "#3D424F"
-                height: 26
-
-                Text {
-                    anchors.fill: parent
-                    text: name
-                    color: "#FFFFFF"
-                    horizontalAlignment: Text.AlignLeft
-                    verticalAlignment: Text.AlignVCenter
-                    leftPadding: 5
-                }
-                visible: searchInput.text ? name.match(`(${searchInput.text})`, "i") : true
-            }
-            highlight: Rectangle {
-                color: "lightblue"
-            }
-            highlightFollowsCurrentItem: true
-            //focus: true
-        }*/
     }
 
 }

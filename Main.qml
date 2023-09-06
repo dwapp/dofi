@@ -9,14 +9,13 @@ ApplicationWindow  {
     visible: true
     title: qsTr("qml app launcher")
 
-//    background: Rectangle {
-//        anchors.fill: parent
-//        color:"White"
-//    }
+    background: Rectangle {
+        anchors.fill: parent
+        color:"White"
+    }
 
     DLauncher {
         id: launch
     }
-
 
 }
