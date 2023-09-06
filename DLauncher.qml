@@ -36,32 +36,32 @@ Rectangle
             originalModel.filter(searchInput.text)
         }
 
-        Keys.onPressed: event => {
-                            if (event.key === Qt.Key_Up) {
-                                if (filteredModel.count == 0)
-                                return
-                                listView.currentIndex -= 1
-                                if (listView.currentIndex < 0)
-                                listView.currentIndex += filteredModel.count
-                                return;
-                            }
-                            if (event.key === Qt.Key_Down) {
-                                if (filteredModel.count == 0)
-                                return
-                                listView.currentIndex += 1
-                                if (listView.currentIndex >= filteredModel.count)
-                                listView.currentIndex -= filteredModel.count
-                                return
-                            }
-                            if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                                if (filteredModel.count != 0) {
-                                    var progam = filteredModel.get(listView.currentIndex).name
-                                    console.log(progam)
-                                }
-                                //backgroundPlate.visible = false
-                                return;
-                            }
-                        }
+        Keys.onPressed: function(event) {
+            if (event.key === Qt.Key_Up) {
+                if (filteredModel.count == 0)
+                    return
+                listView.currentIndex -= 1
+                if (listView.currentIndex < 0)
+                    listView.currentIndex += filteredModel.count
+                return;
+            }
+            if (event.key === Qt.Key_Down) {
+                if (filteredModel.count == 0)
+                    return
+                listView.currentIndex += 1
+                if (listView.currentIndex >= filteredModel.count)
+                    listView.currentIndex -= filteredModel.count
+                return
+            }
+            if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                if (filteredModel.count != 0) {
+                    var progam = filteredModel.get(listView.currentIndex).name
+                    console.log(progam)
+                }
+                //backgroundPlate.visible = false
+                return;
+            }
+        }
     }
 
     ToolSeparator {
@@ -144,7 +144,7 @@ Rectangle
                 Rectangle {
                     id: itemRect
                     width: ListView.view.width
-                    color: ListView.isCurrentItem?"#157efb":"#53d769" //"#3D424F"
+                    color: ListView.isCurrentItem ? "#4084D6" : (index%2 ? "#3D424F" : Qt.darker("3D424F", 1.1))
                     height: 26
                     //visible: searchInput.text ? name.match(`(${searchInput.text})`, "i") : true
                     //height: visible ? 26 :0
@@ -161,10 +161,8 @@ Rectangle
 
                     MouseArea {
                         anchors.fill: parent
-                        hoverEnabled: true
-                        onEntered: {
+                        onClicked: {
                             listView.currentIndex = index
-                            console.log("Mouse entered item:", itemRect.ListView.currentIndex, index)
                         }
                         onDoubleClicked: {
                             var progam = name // filteredModel.get(listView.currentIndex).name
