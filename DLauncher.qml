@@ -11,12 +11,8 @@ Rectangle
     border.color: "#82AAFF"
     border.width: 2
     color: "#465053"
-    radius: 6
-
-    MouseArea {
-        id: bt
-
-    }
+    radius: 10
+    //clip: true
 
     TextInput {
         id: searchInput
@@ -58,7 +54,11 @@ Rectangle
                     var progam = filteredModel.get(listView.currentIndex).name
                     console.log(progam)
                 }
-                //backgroundPlate.visible = false
+                backgroundPlate.visible = false
+                return;
+            }
+            if (event.key === Qt.Key_Escape) {
+                backgroundPlate.visible = false
                 return;
             }
         }
@@ -167,7 +167,7 @@ Rectangle
                         onDoubleClicked: {
                             var progam = name // filteredModel.get(listView.currentIndex).name
                             console.log(progam)
-                            //backgroundPlate.visible = false
+                            backgroundPlate.visible = false
                         }
                     }
                 }
