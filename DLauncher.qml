@@ -99,31 +99,38 @@ Rectangle
 
 
         ScrollView {
+            id: scrollView
             anchors.fill: parent
 
             clip: true
-            ColumnLayout {
-                anchors.fill: parent
-                Repeater {
-                    model: originalModel
-                    Item {
-                        id: wrapper
-                        Rectangle {
-                            anchors.fill: wrapper
-                            color: "#3D424F"
-                            height: 26
 
-                            Text {
-                                anchors.fill: parent
-                                text: name
-                                color: wrapper.ListView.isCurrentItem ? "red" : "#FFFFFF"
-                                horizontalAlignment: Text.AlignLeft
-                                verticalAlignment: Text.AlignVCenter
-                                leftPadding: 5
-                            }
-                            visible: searchInput.text ? name.match(`(${searchInput.text})`, "i") : true
-                       }
+            ListView {
+                anchors.fill: parent
+
+                model: originalModel
+                delegate: itemDelegate
+                // highlight: Rectangle { color: "#FFFFFF" }
+                highlightFollowsCurrentItem: true
+                highlightRangeMode: ListView.ApplyRange
+                //focus: true
+            }
+
+            Component {
+                id: itemDelegate
+
+                Rectangle {
+                    color: ListView.isCurrentItem?"#157efb":"#53d769" //"#3D424F"
+                    height: 26
+
+                    Text {
+                        anchors.fill: parent
+                        text: name
+                        color: "#FFFFFF"
+                        horizontalAlignment: Text.AlignLeft
+                        verticalAlignment: Text.AlignVCenter
+                        leftPadding: 5
                     }
+                    visible: searchInput.text ? name.match(`(${searchInput.text})`, "i") : true
                 }
             }
         }
