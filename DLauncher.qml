@@ -1,10 +1,11 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import DLauncher
 
 Rectangle
 {
-    id: backgroundPlate
+    id: base
     anchors.centerIn: parent
     width: 400
     height: 300
@@ -53,12 +54,14 @@ Rectangle
                 if (filteredModel.count != 0) {
                     var progam = filteredModel.get(listView.currentIndex).name
                     console.log(progam)
+                    DHelperBase.statupApps(progam);
                 }
-                backgroundPlate.visible = false
+
+                base.visible = false
                 return;
             }
             if (event.key === Qt.Key_Escape) {
-                backgroundPlate.visible = false
+                base.visible = false
                 return;
             }
         }
@@ -81,7 +84,7 @@ Rectangle
             margins: 2
         }
 
-        color: backgroundPlate.color
+        color: base.color
         layer.enabled: true
 
         ListModel {
@@ -90,22 +93,11 @@ Rectangle
 
         ListModel {
             id: originalModel
-            ListElement { name: "John"; }
             ListElement { name: "deepin-editor"; }
+            ListElement { name: "deepin-terminal"; }
             ListElement { name: "ls"; }
             ListElement { name: "pwd"; }
-            ListElement { name: "cc"; }
-            ListElement { name: "lsgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggt"; }
-            ListElement { name: "1John"; }
-            ListElement { name: "1deepin-editor"; }
-            ListElement { name: "1ls"; }
-            ListElement { name: "1pwd"; }
-            ListElement { name: "1cc"; }
-            ListElement { name: "2John"; }
-            ListElement { name: "2deepin-editor"; }
-            ListElement { name: "2ls"; }
-            ListElement { name: "2pwd"; }
-            ListElement { name: "2cc"; }
+
 
             function filter(subText) {
                 filteredModel.clear()
@@ -167,7 +159,7 @@ Rectangle
                         onDoubleClicked: {
                             var progam = name // filteredModel.get(listView.currentIndex).name
                             console.log(progam)
-                            backgroundPlate.visible = false
+                            base.visible = false
                         }
                     }
                 }

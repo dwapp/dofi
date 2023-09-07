@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(untitled1 VERSION 0.1 LANGUAGES CXX)
+project(dLauncher VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -13,10 +13,11 @@ qt_add_executable(dLauncher
 )
 
 qt_add_qml_module(dLauncher
-    URI untitled1
+    URI DLauncher
     VERSION 1.0
     QML_FILES Main.qml
     QML_FILES DLauncher.qml
+    SOURCES dhelperbase.h dhelperbase.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
