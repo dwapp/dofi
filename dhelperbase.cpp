@@ -9,14 +9,19 @@ DHelperBase::DHelperBase(QObject *parent)
 }
 
 
-bool DHelperBase::statupApps(const QString &program)
+bool DHelperBase::statupApps(const QString &command)
 {
-    qDebug() << program;
-    bool success = QProcess::startDetached(program);
-    /*QProcess process;
-    process.setProgram("sh");
-    QString c = "echo " + program + "| ${SHELL:-\"/bin/sh\"}";
-    process.setArguments(QStringList() << c);
-    process.waitForFinished();*/
-    return success;
+    qDebug() << command;
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 15, 0 )
+    auto args = QProcess::splitCommand(command);
+    auto const program = args.takeFirst();
+    return QProcess::startDetached(program, args);
+#else
+    return QProcess::startDetached(command);
+#endif
+//    QProcess process;
+//    process.setProgram("sh");
+//    QString c = "echo " + program + "| ${SHELL:-\"/bin/sh\"}";
+//    process.setArguments(QStringList() << c);
+//    process.waitForFinished();
 }

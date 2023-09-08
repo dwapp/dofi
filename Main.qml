@@ -25,9 +25,15 @@ Window {
 
     Component.onCompleted: {
         centerWindow()
-//        if (contentItem) {
-//            contentItem.border.radius = 10
-//        }
+    }
+
+    Timer {
+        id: quitTimer
+        interval: 500 // ms
+        repeat: false
+        onTriggered: {
+            Qt.quit()
+        }
     }
 
     DLauncher {
@@ -35,7 +41,7 @@ Window {
         anchors.fill: parent
         onVisibleChanged: {
             if (!visible)
-                Qt.quit()
+                quitTimer.start();
         }
     }
 }
