@@ -1,16 +1,5 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QString>
-#include <QProcess>
-
-//QList<QByteArray> executeShellScript()
-//{
-//    QProcess process;
-//    process.start("dmenu_path");
-//    process.waitForFinished();
-
-//    return process.readAll().split('/n');
-//}
 
 int main(int argc, char *argv[])
 {

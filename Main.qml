@@ -24,9 +24,9 @@ Window {
 
     Component.onCompleted: {
         centerWindow()
-        if (contentItem) {
-            contentItem.border.radius = 10
-        }
+//        if (contentItem) {
+//            contentItem.border.radius = 10
+//        }
     }
 
     DLauncher {

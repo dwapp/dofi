@@ -18,6 +18,8 @@ qt_add_qml_module(dLauncher
     QML_FILES Main.qml
     QML_FILES DLauncher.qml
     SOURCES dhelperbase.h dhelperbase.cpp
+    SOURCES launcherlistmodel.h launcherlistmodel.cpp
+    SOURCES laitemdata.h laitemdata.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

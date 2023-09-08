@@ -30,30 +30,33 @@ Rectangle
         focus: true
 
         onTextChanged: {
-            originalModel.filter(searchInput.text)
+            originalModel.filterStr = searchInput.text
+            if (listView.currentIndex >= originalModel.rowCount())
+                listView.currentIndex = originalModel.rowCount()-1;
         }
 
         Keys.onPressed: function(event) {
             if (event.key === Qt.Key_Up) {
-                if (filteredModel.count == 0)
+                if (originalModel.rowCount() === 0)
                     return
                 listView.currentIndex -= 1
                 if (listView.currentIndex < 0)
-                    listView.currentIndex += filteredModel.count
+                    listView.currentIndex += originalModel.rowCount()
                 return;
             }
             if (event.key === Qt.Key_Down) {
-                if (filteredModel.count == 0)
+                if (originalModel.rowCount() === 0)
                     return
                 listView.currentIndex += 1
-                if (listView.currentIndex >= filteredModel.count)
-                    listView.currentIndex -= filteredModel.count
+                if (listView.currentIndex >= originalModel.rowCount())
+                    listView.currentIndex -= originalModel.rowCount()
                 return
             }
             if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                if (filteredModel.count != 0) {
-                    var progam = filteredModel.get(listView.currentIndex).name
-                    console.log(progam)
+                if (listView.currentIndex < 0) {
+                    DHelperBase.statupApps(searchInput.text);
+                } else {
+                    var progam = originalModel.get(listView.currentIndex)
                     DHelperBase.statupApps(progam);
                 }
 
@@ -87,31 +90,12 @@ Rectangle
         color: base.color
         layer.enabled: true
 
-        ListModel {
-            id: filteredModel
-        }
-
-        ListModel {
+        LauncherListModel {
             id: originalModel
-            ListElement { name: "deepin-editor"; }
-            ListElement { name: "deepin-terminal"; }
-            ListElement { name: "ls"; }
-            ListElement { name: "pwd"; }
-
-
-            function filter(subText) {
-                filteredModel.clear()
-                var regex = new RegExp(subText, 'i');
-                for (var i = 0; i < originalModel.count; i++) {
-                    if (originalModel.get(i).name.toString().match(regex)) {
-                        filteredModel.append(originalModel.get(i))
-                    }
-                }
-            }
         }
 
         Component.onCompleted: {
-            originalModel.filter("")
+            originalModel.init()
         }
 
         ScrollView {
@@ -124,7 +108,7 @@ Rectangle
                 id: listView
                 anchors.fill: parent
 
-                model: filteredModel
+                model: originalModel // todo
                 delegate: itemDelegate
                 // highlight: Rectangle { color: "#FFFFFF" }
                 highlightFollowsCurrentItem: true
@@ -157,7 +141,7 @@ Rectangle
                             listView.currentIndex = index
                         }
                         onDoubleClicked: {
-                            var progam = name // filteredModel.get(listView.currentIndex).name
+                            var progam = name // originalModel.get(listView.currentIndex).name
                             console.log(progam)
                             base.visible = false
                         }

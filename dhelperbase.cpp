@@ -11,7 +11,12 @@ DHelperBase::DHelperBase(QObject *parent)
 
 bool DHelperBase::statupApps(const QString &program)
 {
+    qDebug() << program;
     bool success = QProcess::startDetached(program);
-    for (int i = 1; i <= 10000000000000; i++);
+    /*QProcess process;
+    process.setProgram("sh");
+    QString c = "echo " + program + "| ${SHELL:-\"/bin/sh\"}";
+    process.setArguments(QStringList() << c);
+    process.waitForFinished();*/
     return success;
 }
