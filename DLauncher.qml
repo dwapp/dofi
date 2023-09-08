@@ -120,10 +120,9 @@ Rectangle
                 Rectangle {
                     id: itemRect
                     width: ListView.view.width
-                    color: ListView.isCurrentItem ? "#4084D6" : (index%2 ? "#3D424F" : Qt.darker("3D424F", 1.1))
+                    color: ListView.isCurrentItem ? "#4084D6" : (index%2 ? "#3D424F" : "#000000")
+                    // Qt.darker("3D424F", 1.1) can't work on deepin
                     height: 26
-                    //visible: searchInput.text ? name.match(`(${searchInput.text})`, "i") : true
-                    //height: visible ? 26 :0
 
                     Text {
                         id: itemText
@@ -141,8 +140,8 @@ Rectangle
                             listView.currentIndex = index
                         }
                         onDoubleClicked: {
-                            var progam = name // originalModel.get(listView.currentIndex).name
-                            console.log(progam)
+                            var progam = name
+                            DHelperBase.statupApps(progam);
                             base.visible = false
                         }
                     }
