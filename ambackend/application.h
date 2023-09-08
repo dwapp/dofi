@@ -21,6 +21,8 @@ public:
     Q_PROPERTY(PropMap Icons READ icons)
     PropMap icons() const;
 
+    void Launch(const QString &action="", const QStringList &fields={}, const QVariantMap &options={});
+
 private:
     OrgDesktopspecApplicationManager1ApplicationInterface *inter;
 };

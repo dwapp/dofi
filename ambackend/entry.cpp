@@ -7,8 +7,13 @@
 
 #include <algorithm>
 #include <QDebug>
+#include <types.h>
 
 int main (int argc, char *argv[]) {
+    qRegisterMetaType<ObjectInterfaceMap>("ObjectInterfaceMap");
+    qRegisterMetaType<ObjectMap>("ObjectMap");
+    qRegisterMetaType<PropMap>("PropMap");
+
     QCoreApplication app(argc, argv);
     ApplicationManager *manager = new ApplicationManager;
 
@@ -21,8 +26,11 @@ int main (int argc, char *argv[]) {
 
     qDebug() << "begin:" << list.size();
     for (Application* app : list) {
-        qDebug() << app->displayName() << " " << app->iD() << " " << app->icons();
+        qDebug() << "name:" << " " << app->displayName() << " id: " << app->iD();
+        if (app->iD() == "xterm") {
+            app->Launch();
+        }
     }
 
-    //return app.exec();
+    return app.exec();
 }

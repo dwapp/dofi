@@ -20,3 +20,8 @@ QString Application::iD() const {
 PropMap Application::icons() const {
     return inter->icons();
 }
+
+void Application::Launch(const QString &action, const QStringList &fields, const QVariantMap &options)
+{
+    inter->Launch(action, fields, options);
+}

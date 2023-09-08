@@ -6,7 +6,6 @@ LaItemData::LaItemData(QObject *parent)
 
 }
 
-
 void LaItemData::setName(const QString &newName)
 {
     m_name = name();

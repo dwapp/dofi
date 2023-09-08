@@ -96,6 +96,8 @@ Rectangle
 
         Component.onCompleted: {
             originalModel.init()
+            if (originalModel.rowCount() > 0)
+                listView.currentIndex = 0;
         }
 
         ScrollView {
@@ -108,10 +110,8 @@ Rectangle
                 id: listView
                 anchors.fill: parent
 
-                model: originalModel // todo
+                model: originalModel
                 delegate: itemDelegate
-                // highlight: Rectangle { color: "#FFFFFF" }
-                highlightFollowsCurrentItem: true
             }
 
             Component {
