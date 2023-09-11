@@ -55,8 +55,9 @@ Rectangle
                 if (listView.currentIndex < 0) {
                     originalModel.react(searchInput.text)
                 } else {
-                    var progam = originalModel.get(listView.currentIndex)
-                    originalModel.react(progam);
+                    //var progam = originalModel.get(listView.currentIndex)
+                    //originalModel.react(progam);
+                    originalModel.react(listView.currentIndex);
                 }
 
                 base.visible = false
@@ -90,7 +91,10 @@ Rectangle
         color: base.color
         layer.enabled: true
 
-        LauncherListModel {
+//        LauncherListModel {
+//            id: originalModel
+//        }
+        AmListModel {
             id: originalModel
         }
 
@@ -141,7 +145,8 @@ Rectangle
                         }
                         onDoubleClicked: {
                             var progam = name
-                            originalModel.react(progam);
+                            //originalModel.react(progam);
+                            originalModel.react(listView.currentIndex);
                             base.visible = false
                         }
                     }

@@ -21,7 +21,8 @@ qt_add_qml_module(dLauncher
     QML_FILES Main.qml
     QML_FILES DLauncher.qml
     SOURCES launcherlistmodel.h launcherlistmodel.cpp
-    SOURCES laitemdata.h laitemdata.cpp
+    SOURCES
+    SOURCES amlistmodel.h amlistmodel.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -33,6 +34,11 @@ set_target_properties(dLauncher PROPERTIES
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
+)
+
+target_include_directories(dLauncher
+    PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/ambackend
 )
 
 target_link_libraries(dLauncher

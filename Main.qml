@@ -29,7 +29,7 @@ Window {
 
     Timer {
         id: quitTimer
-        interval: 500 // ms
+        interval: 2000 // ms
         repeat: false
         onTriggered: {
             Qt.quit()
