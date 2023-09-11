@@ -36,7 +36,9 @@ int main (int argc, char *argv[]) {
     qDebug() << "begin:" << list.size();
     for (Application* app : list) {
         qDebug() << "name:" << " " << app->displayName() << " id: " << app->iD() << "icons: " << app->icons();
-        if (app->iD() == "xterm") {
+        if (app->iD() == "qq") {
+            qDebug() << "!!!!!!!!!!!!";
+            qDebug() << app->displayName() << " start";
             app->Launch();
         }
     }

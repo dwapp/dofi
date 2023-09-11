@@ -12,8 +12,7 @@ Rectangle
     border.color: "#82AAFF"
     border.width: 2
     color: "#465053"
-    radius: 10
-    //clip: true
+    radius: 5
 
     TextInput {
         id: searchInput
@@ -79,12 +78,13 @@ Rectangle
 
     Rectangle {
         id: btn
+
         anchors {
             left: parent.left
             right: parent.right
             top: separator.bottom
             bottom: parent.bottom
-            margins: 2
+            margins: 3
         }
 
         color: base.color
@@ -104,8 +104,6 @@ Rectangle
             id: scrollView
             anchors.fill: parent
 
-            clip: true
-
             ListView {
                 id: listView
                 anchors.fill: parent
@@ -119,10 +117,12 @@ Rectangle
 
                 Rectangle {
                     id: itemRect
+
                     width: ListView.view.width
                     color: ListView.isCurrentItem ? "#4084D6" : (index%2 ? "#3D424F" : "#000000")
                     // Qt.darker("3D424F", 1.1) can't work on deepin
                     height: 26
+                    //radius: base.radius
 
                     Text {
                         id: itemText
