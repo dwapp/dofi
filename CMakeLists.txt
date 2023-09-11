@@ -9,6 +9,11 @@ find_package(Qt6 6.4 REQUIRED COMPONENTS Core Quick DBus Network)
 
 qt_standard_project_setup()
 
+if(QT_KNOWN_POLICY_QTP0001) # this policy was introduced in Qt 6.5
+    qt_policy(SET QTP0001 NEW)
+    # the RESOURCE_PREFIX argument for qt_add_qml_module() defaults to ":/qt/qml/"
+endif()
+
 add_subdirectory(ambackend)
 
 qt_add_executable(dLauncher
@@ -25,9 +30,6 @@ qt_add_qml_module(dLauncher
     SOURCES amlistmodel.h amlistmodel.cpp
 )
 
-# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
-# If you are developing for iOS or macOS you should consider setting an
-# explicit, fixed bundle identifier manually though.
 set_target_properties(dLauncher PROPERTIES
 #    MACOSX_BUNDLE_GUI_IDENTIFIER com.example.appuntitled1
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
