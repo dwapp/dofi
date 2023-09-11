@@ -1,9 +1,12 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(dLauncher VERSION 0.1 LANGUAGES CXX)
+project(dofi VERSION 0.1 LANGUAGES CXX)
 
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 find_package(Qt6 6.4 REQUIRED COMPONENTS Core Quick DBus Network)
 
@@ -16,12 +19,12 @@ endif()
 
 add_subdirectory(ambackend)
 
-qt_add_executable(dLauncher
+qt_add_executable(dofi
     main.cpp
 )
 
-qt_add_qml_module(dLauncher
-    URI DLauncher
+qt_add_qml_module(dofi
+    URI Dofi
     VERSION 1.0
     QML_FILES Main.qml
     QML_FILES DLauncher.qml
@@ -30,7 +33,7 @@ qt_add_qml_module(dLauncher
     SOURCES amlistmodel.h amlistmodel.cpp
 )
 
-set_target_properties(dLauncher PROPERTIES
+set_target_properties(dofi PROPERTIES
 #    MACOSX_BUNDLE_GUI_IDENTIFIER com.example.appuntitled1
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -38,12 +41,12 @@ set_target_properties(dLauncher PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-target_include_directories(dLauncher
+target_include_directories(dofi
     PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/ambackend
 )
 
-target_link_libraries(dLauncher
+target_link_libraries(dofi
     PRIVATE
     $<TARGET_OBJECTS:treeland-session-entry>
     Qt6::Quick
@@ -53,7 +56,7 @@ target_link_libraries(dLauncher
 )
 
 include(GNUInstallDirs)
-install(TARGETS dLauncher
+install(TARGETS dofi
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
