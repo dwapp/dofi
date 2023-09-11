@@ -53,10 +53,10 @@ Rectangle
             }
             if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
                 if (listView.currentIndex < 0) {
-                    DHelperBase.statupApps(searchInput.text);
+                    originalModel.react(searchInput.text)
                 } else {
                     var progam = originalModel.get(listView.currentIndex)
-                    DHelperBase.statupApps(progam);
+                    originalModel.react(progam);
                 }
 
                 base.visible = false
@@ -141,7 +141,7 @@ Rectangle
                         }
                         onDoubleClicked: {
                             var progam = name
-                            DHelperBase.statupApps(progam);
+                            originalModel.react(progam);
                             base.visible = false
                         }
                     }

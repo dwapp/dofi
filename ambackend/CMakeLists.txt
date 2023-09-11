@@ -1,5 +1,5 @@
 set(DEMO_SOURCE
-    entry.cpp
+    entry.h
     application.h
     application.cpp
     applicationmanager.h
@@ -26,10 +26,10 @@ qt_add_dbus_interface(AM_INTERFACE
     "Application"
 )
 
+add_library(treeland-session-entry OBJECT ${DEMO_SOURCE} ${AM_INTERFACE})
 
-add_executable(treeland-session-entry ${DEMO_SOURCE} ${AM_INTERFACE})
 target_link_libraries(treeland-session-entry
-    PUBLIC
+    PRIVATE
     Qt6::Core
     Qt6::DBus
     Qt6::Network

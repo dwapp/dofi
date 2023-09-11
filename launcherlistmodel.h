@@ -35,6 +35,8 @@ public :
 
     Q_INVOKABLE void init();
 
+    Q_INVOKABLE bool react(QVariant index);
+
 private:
     QStringList m_data;
     QVector<int> m_filter;

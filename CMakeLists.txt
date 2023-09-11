@@ -20,7 +20,6 @@ qt_add_qml_module(dLauncher
     VERSION 1.0
     QML_FILES Main.qml
     QML_FILES DLauncher.qml
-    SOURCES dhelperbase.h dhelperbase.cpp
     SOURCES launcherlistmodel.h launcherlistmodel.cpp
     SOURCES laitemdata.h laitemdata.cpp
 )
@@ -37,7 +36,12 @@ set_target_properties(dLauncher PROPERTIES
 )
 
 target_link_libraries(dLauncher
-    PRIVATE Qt6::Quick
+    PRIVATE
+    $<TARGET_OBJECTS:treeland-session-entry>
+    Qt6::Quick
+    Qt6::Core
+    Qt6::DBus
+    Qt6::Network
 )
 
 include(GNUInstallDirs)

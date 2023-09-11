@@ -2,16 +2,14 @@
 #include "application.h"
 
 #include <QDBusConnection>
-#include <QDBusArgument>
 #include <QCoreApplication>
-#include <QList>
 #include <QDBusMetaType>
 
 #include <algorithm>
 #include <QDebug>
 #include <types.h>
 
-int main (int argc, char *argv[]) {
+static void init() {
     qDBusRegisterMetaType<QMap<QString, QString>>();
 
     qRegisterMetaType<PropMap>("PropMap");
@@ -23,7 +21,6 @@ int main (int argc, char *argv[]) {
     qRegisterMetaType<ObjectInterfaceMap>("ObjectInterfaceMap");
     qDBusRegisterMetaType<ObjectInterfaceMap>();
 
-    QCoreApplication app(argc, argv);
     ApplicationManager *manager = new ApplicationManager;
 
     auto rlist = manager->list();
@@ -33,15 +30,13 @@ int main (int argc, char *argv[]) {
         return new Application(path, manager);
     });
 
-    qDebug() << "begin:" << list.size();
-    for (Application* app : list) {
-        qDebug() << "name:" << " " << app->displayName() << " id: " << app->iD() << "icons: " << app->icons();
-        if (app->iD() == "qq") {
-            qDebug() << "!!!!!!!!!!!!";
-            qDebug() << app->displayName() << " start";
-            app->Launch();
-        }
-    }
-
-    return app.exec();
+//    qDebug() << "begin:" << list.size();
+//    for (Application* app : list) {
+//        qDebug() << "name:" << " " << app->displayName() << " id: " << app->iD() << "icons: " << app->icons();
+//        if (app->iD() == "qq") {
+//            qDebug() << "!!!!!!!!!!!!";
+//            qDebug() << app->displayName() << " start";
+//            app->Launch();
+//        }
+//    }
 }
