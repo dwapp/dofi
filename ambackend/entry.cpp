@@ -2,17 +2,26 @@
 #include "application.h"
 
 #include <QDBusConnection>
+#include <QDBusArgument>
 #include <QCoreApplication>
 #include <QList>
+#include <QDBusMetaType>
 
 #include <algorithm>
 #include <QDebug>
 #include <types.h>
 
 int main (int argc, char *argv[]) {
-    qRegisterMetaType<ObjectInterfaceMap>("ObjectInterfaceMap");
-    qRegisterMetaType<ObjectMap>("ObjectMap");
+    qDBusRegisterMetaType<QMap<QString, QString>>();
+
     qRegisterMetaType<PropMap>("PropMap");
+    qDBusRegisterMetaType<PropMap>();
+
+    qRegisterMetaType<ObjectMap>("ObjectMap");
+    qDBusRegisterMetaType<ObjectMap>();
+
+    qRegisterMetaType<ObjectInterfaceMap>("ObjectInterfaceMap");
+    qDBusRegisterMetaType<ObjectInterfaceMap>();
 
     QCoreApplication app(argc, argv);
     ApplicationManager *manager = new ApplicationManager;
@@ -26,7 +35,7 @@ int main (int argc, char *argv[]) {
 
     qDebug() << "begin:" << list.size();
     for (Application* app : list) {
-        qDebug() << "name:" << " " << app->displayName() << " id: " << app->iD();
+        qDebug() << "name:" << " " << app->displayName() << " id: " << app->iD() << "icons: " << app->icons();
         if (app->iD() == "xterm") {
             app->Launch();
         }
