@@ -1,4 +1,5 @@
 find_package(Qt6 6.4 REQUIRED COMPONENTS Core Quick DBus Network)
+find_package(LayerShellQt REQUIRED)
 
 qt_standard_project_setup()
 
@@ -44,6 +45,7 @@ target_link_libraries(dofi
     Qt6::Core
     Qt6::DBus
     Qt6::Network
+    LayerShellQt::Interface
 )
 
 target_compile_definitions(dofi

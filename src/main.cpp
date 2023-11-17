@@ -1,19 +1,23 @@
 // SPDX-FileCopyrightText: rewine <luhongxu@deepin.org>.
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+#include "launcherlistmodel.h"
+#include "dmenuimpl.h"
+#include "amimpl.h"
+
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QCommandLineParser>
 #include <QQmlComponent>
 #include <QQuickView>
 #include <QQuickItem>
-#include "launcherlistmodel.h"
-#include "dmenuimpl.h"
-#include "amimpl.h"
+#include <LayerShellQt/Window>
+#include <LayerShellQt/Shell>
 
 int main(int argc, char *argv[])
 {
     //qputenv("QT_QPA_PLATFORM", "wayland");
+    LayerShellQt::Shell::useLayerShell();
 
     QGuiApplication app(argc, argv);
     app.setOrganizationName("deepin");
@@ -53,23 +57,19 @@ int main(int argc, char *argv[])
                      &app, []() { QCoreApplication::exit(-1); },
     Qt::QueuedConnection);
     engine.load(url);
-/*
+
     QQuickWindow *window = qobject_cast<QQuickWindow*>(engine.rootObjects().at(0));
     if (!window) {
         qFatal("Error: Your root item has to be a window.");
         return -1;
     }
-    window->show();
-    QQuickItem *root = window->contentItem();
-
-    QQmlComponent comp(&engine, QUrl(u"qrc:/qt/qml/Dofi/DLauncher.qml"_qs));
-    auto *object = qobject_cast<QQuickItem*>(comp.createWithInitialProperties(QVariantMap{
-            {"originalModel", QVariant::fromValue<LauncherListModel *>(new LauncherListModel)}
-    }));
-
-    QQmlEngine::setObjectOwnership(object, QQmlEngine::CppOwnership);
-    object->setParentItem(root);
-    object->setParent(&engine);
-*/
+    auto layerShell = LayerShellQt::Window::get(window);
+    layerShell->setCloseOnDismissed(false);
+    layerShell->setLayer(LayerShellQt::Window::LayerTop);
+    layerShell->setKeyboardInteractivity(LayerShellQt::Window::KeyboardInteractivityExclusive);
+    layerShell->setExclusiveZone(-1);
+    //layerShell->setAnchors(LayerShellQt::Window::AnchorTop);
+    //layerShell->setMargins({100,100,100,100});
+    //window->resize(400, 300);
     return app.exec();
 }

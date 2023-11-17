@@ -17,9 +17,11 @@
         let
           pkgs = nixpkgs.legacyPackages.${system};
 
+          layer-shell-qt = kde2nix.packages.${system}.plasma.layer-shell-qt;
+
           dofi = pkgs.qt6Packages.callPackage ./nix {
             nix-filter = nix-filter.lib;
-            layer-shell-qt = kde2nix.packages.${system}.plasma.layer-shell-qt;
+            inherit layer-shell-qt;
           };
         in
         {
@@ -42,7 +44,7 @@
               # https://github.com/NixOS/nixpkgs/issues/251918
               export NIX_CFLAGS_COMPILE=$(echo $NIX_CFLAGS_COMPILE | sed 's/-DQT_NO_DEBUG//')
               #export QT_LOGGING_RULES="*.debug=true;qt.*.debug=false"
-              export QT_PLUGIN_PATH=${makeQtpluginPath (with pkgs.qt6; [ qtbase qtdeclarative qtquick3d qtwayland ])}
+              export QT_PLUGIN_PATH=${makeQtpluginPath (with pkgs.qt6; [ qtbase qtdeclarative qtquick3d qtwayland layer-shell-qt ])}
               export QML2_IMPORT_PATH=${makeQmlpluginPath (with pkgs.qt6; [ qtdeclarative qtquick3d ])}
               export QML_IMPORT_PATH=$QML2_IMPORT_PATH
             '';
