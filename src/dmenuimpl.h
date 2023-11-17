@@ -1,18 +1,21 @@
-#ifndef AMIMPL_H
-#define AMIMPL_H
+// SPDX-FileCopyrightText: rewine <luhongxu@deepin.org>.
+// SPDX-License-Identifier: GPL-3.0-or-later
+
+#ifndef DMENUIMPL_H
+#define DMENUIMPL_H
 
 #include "modelhelperimpl.h"
+
+#include <QObject>
 #include <QVector>
-#include <QString>
-#include <types.h>
+#include <QStringList>
 
-class Application;
-
-class AmImpl : public ModelHelperImpl
+class DmenuImpl : public ModelHelperImpl
 {
     Q_OBJECT
+
 public:
-    explicit AmImpl(QObject *parent = nullptr);
+    explicit DmenuImpl(QObject *parent = nullptr);
 
     int rowCount(const QModelIndex& parent) const override;
     int columnCount(const QModelIndex& parent) const override;
@@ -26,12 +29,9 @@ public:
     bool react(QVariant index) override;
 
 private:
-    QVector<Application*> m_data;
+    QStringList m_data;
     QVector<int> m_filter;
     QString m_filterStr;
-    // data
-    QVector<QString> m_appId;
-    QVector<PropMap> m_displayName;
 };
 
-#endif // AMIMPL_H
+#endif // DMENUIMPL_H

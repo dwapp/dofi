@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: rewine <luhongxu@deepin.org>.
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 #include "amimpl.h"
 #include "entry.h"
 #include "applicationmanager.h"

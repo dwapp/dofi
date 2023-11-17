@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: rewine <luhongxu@deepin.org>.
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 import QtQuick 2.15
 // QtQuick.Window Not in Qt 6.4
 // import QtQuick.Window 2.15

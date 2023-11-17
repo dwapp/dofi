@@ -21,6 +21,10 @@
           packages.default = dofi;
 
           devShells.default = pkgs.mkShell {
+            packages = with pkgs; [
+              reuse
+            ];
+
             inputsFrom = [
               self.packages.${system}.default
             ];

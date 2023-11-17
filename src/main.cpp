@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: rewine <luhongxu@deepin.org>.
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QCommandLineParser>

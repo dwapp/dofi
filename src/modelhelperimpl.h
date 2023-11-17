@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: rewine <luhongxu@deepin.org>.
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 #ifndef MODELHELPERIMPL_H
 #define MODELHELPERIMPL_H
 
