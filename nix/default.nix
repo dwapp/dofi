@@ -9,6 +9,7 @@
 , qtbase
 , qtdeclarative
 , qtwayland
+, layer-shell-qt
 }:
 
 stdenv.mkDerivation rec {
@@ -38,6 +39,7 @@ stdenv.mkDerivation rec {
     qtbase
     qtdeclarative
     qtwayland
+    layer-shell-qt
   ];
 
   strictDeps = true;

@@ -5,9 +5,13 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     nix-filter.url = "github:numtide/nix-filter";
+    kde2nix = {
+      url = "gitlab:K900/kde2nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, nix-filter }@input:
+  outputs = { self, nixpkgs, flake-utils, nix-filter, kde2nix }@input:
     flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" "riscv64-linux" ]
       (system:
         let
@@ -15,6 +19,7 @@
 
           dofi = pkgs.qt6Packages.callPackage ./nix {
             nix-filter = nix-filter.lib;
+            layer-shell-qt = kde2nix.packages.${system}.plasma.layer-shell-qt;
           };
         in
         {
