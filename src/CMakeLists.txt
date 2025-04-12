@@ -1,4 +1,4 @@
-find_package(Qt6 6.4 REQUIRED COMPONENTS Core Quick DBus Network)
+find_package(Qt6 6.7 REQUIRED COMPONENTS Core Quick DBus)
 find_package(LayerShellQt REQUIRED)
 
 qt_standard_project_setup()
@@ -25,14 +25,6 @@ qt_add_qml_module(dofi
     SOURCES amimpl.h amimpl.cpp
 )
 
-set_target_properties(dofi PROPERTIES
-#    MACOSX_BUNDLE_GUI_IDENTIFIER com.example.appuntitled1
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    MACOSX_BUNDLE TRUE
-    WIN32_EXECUTABLE TRUE
-)
-
 target_include_directories(dofi
     PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/ambackend
@@ -44,7 +36,6 @@ target_link_libraries(dofi
     Qt6::Quick
     Qt6::Core
     Qt6::DBus
-    Qt6::Network
     LayerShellQt::Interface
 )
 

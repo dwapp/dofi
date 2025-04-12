@@ -32,5 +32,4 @@ target_link_libraries(application-manager-entry
     PRIVATE
     Qt6::Core
     Qt6::DBus
-    Qt6::Network
 )

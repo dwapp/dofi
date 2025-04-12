@@ -1,12 +1,17 @@
 // SPDX-FileCopyrightText: rewine <luhongxu@deepin.org>.
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-import QtQuick 2.15
-import QtQuick.Window 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
+import QtQuick
+import QtQuick.Window
+import QtQuick.Controls
+import QtQuick.Layouts
+import org.kde.layershell as LayerShell
 
 Window {
+    LayerShell.Window.anchors: LayerShell.Window.AnchorNone
+    LayerShell.Window.layer: LayerShell.Window.LayerOverlay
+    LayerShell.Window.keyboardInteractivity: LayerShell.WindowKeyboardInteractivityExclusive
+    LayerShell.Window.exclusionZone: -1
     width: 400
     height: 300
     visible: true
