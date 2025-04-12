@@ -44,6 +44,13 @@ target_compile_definitions(dofi
     LIBEXEC_PATH="${CMAKE_INSTALL_FULL_LIBEXECDIR}"
 )
 
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_compile_definitions(dofi
+        PRIVATE
+        DMENU_PATH="${CMAKE_CURRENT_LIST_DIR}/dmenu_path"
+    )
+endif()
+
 install(PROGRAMS dmenu_path DESTINATION ${CMAKE_INSTALL_LIBEXECDIR})
 
 install(TARGETS dofi
