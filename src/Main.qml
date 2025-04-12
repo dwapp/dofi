@@ -10,10 +10,10 @@ import org.kde.layershell as LayerShell
 Window {
     LayerShell.Window.anchors: LayerShell.Window.AnchorNone
     LayerShell.Window.layer: LayerShell.Window.LayerOverlay
-    LayerShell.Window.keyboardInteractivity: LayerShell.WindowKeyboardInteractivityExclusive
+    LayerShell.Window.keyboardInteractivity: LayerShell.Window.KeyboardInteractivityExclusive
     LayerShell.Window.exclusionZone: -1
-    width: 400
-    height: 300
+    width: 500
+    height: 400
     visible: true
 
     flags: Qt.FramelessWindowHint
