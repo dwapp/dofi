@@ -35,7 +35,7 @@ int LauncherListModel::columnCount(const QModelIndex& parent) const
 
 QVariant LauncherListModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid())
+    if (!checkIndex(index))
         return QVariant();
 
     QString name = impl->data(index, role).toString();

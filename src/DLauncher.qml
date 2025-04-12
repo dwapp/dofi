@@ -60,8 +60,6 @@ Rectangle
                 if (listView.currentIndex < 0) {
                     listModel.react(searchInput.text)
                 } else {
-                    //var progam = listModel.get(listView.currentIndex)
-                    //listModel.react(progam);
                     listModel.react(listView.currentIndex);
                 }
 
