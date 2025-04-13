@@ -1,15 +1,16 @@
-{ stdenv
-, lib
-, nix-filter
-, fetchFromGitHub
-, cmake
-, pkg-config
-, wayland-scanner
-, wrapQtAppsHook
-, qtbase
-, qtdeclarative
-, qtwayland
-, layer-shell-qt
+{
+  stdenv,
+  lib,
+  nix-filter,
+  fetchFromGitHub,
+  cmake,
+  pkg-config,
+  wayland-scanner,
+  wrapQtAppsHook,
+  qtbase,
+  qtdeclarative,
+  qtwayland,
+  layer-shell-qt,
 }:
 
 stdenv.mkDerivation rec {
@@ -44,11 +45,11 @@ stdenv.mkDerivation rec {
 
   strictDeps = true;
 
-  meta = with lib; {
-    description = "A qml application launcher for wayland inspired by rofi";
+  meta = {
+    description = "Simple qml application launcher for wayland inspired by rofi";
     homepage = "https://github.com/dwapp/dofi";
-    license = licenses.gpl3Plus;
-    platforms = platforms.linux;
+    license = lib.licenses.gpl3Plus;
+    platforms = lib.platforms.linux;
+    maintainers = with lib.maintainers; [ rewine ];
   };
 }
-

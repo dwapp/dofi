@@ -1,0 +1,52 @@
+version = 1
+SPDX-PackageName = "dofi"
+SPDX-PackageSupplier = "rewine <luhongxu@deepin.org>"
+SPDX-PackageDownloadLocation = "https://github.com/dwapp/dofi"
+
+[[annotations]]
+path = [".github/**", ".obs/**.yml", "*.toml"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "None"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = [".gitignore", ".gitmodules"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "None"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = ["**.cmake", "**CMakeLists.txt", "**.pc.in", "**cmake.in"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "None"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = "README.md"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "JiDe Zhang"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = ["**.nix", ".envrc", "flake.lock"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "None"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = "debian/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "None"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = "src/dmenu_path"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "suckless.org"
+SPDX-License-Identifier = "LicenseRef-MIT-X-Consortium-License"
+
+[[annotations]]
+path = ["src/ambackend/org.desktopspec.ApplicationManager1.Application.xml", "src/ambackend/org.desktopspec.ApplicationManager1.xml"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "UnionTech Software Technology Co., Ltd."
+SPDX-License-Identifier = "GPL-3.0-or-later"
